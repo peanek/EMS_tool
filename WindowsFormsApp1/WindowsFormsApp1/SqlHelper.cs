@@ -20,10 +20,8 @@ namespace WindowsFormsApp1
             get
             {
                 if (sqlconn.State==System.Data.ConnectionState.Closed)
-                {
                     sqlconn.Open();
                     return true;
-                }
 
             }
         }
