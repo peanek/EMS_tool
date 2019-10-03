@@ -44,6 +44,12 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.checkBoxAdvancedOptions = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -176,11 +182,72 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(290, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(220, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Reset FCEMS admin passwrod";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(290, 55);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(220, 23);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Check table sizes in MB";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(290, 182);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(220, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Purge [FCEMS].[dbo].[logs_raw] table";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(290, 153);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(220, 23);
+            this.button4.TabIndex = 13;
+            this.button4.Text = "Purge [FCEMS].[dbo].[logs] table";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(290, 84);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(220, 23);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "Shrink FCEMS db";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAdvancedOptions
+            // 
+            this.checkBoxAdvancedOptions.AutoSize = true;
+            this.checkBoxAdvancedOptions.Location = new System.Drawing.Point(290, 130);
+            this.checkBoxAdvancedOptions.Name = "checkBoxAdvancedOptions";
+            this.checkBoxAdvancedOptions.Size = new System.Drawing.Size(153, 17);
+            this.checkBoxAdvancedOptions.TabIndex = 15;
+            this.checkBoxAdvancedOptions.Text = "Show also PURGE options";
+            this.checkBoxAdvancedOptions.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 361);
+            this.Controls.Add(this.checkBoxAdvancedOptions);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonConnectSql);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.textBoxUsername);
@@ -220,6 +287,12 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkBoxAdvancedOptions;
     }
 }
 

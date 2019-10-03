@@ -14,7 +14,12 @@ namespace WindowsFormsApp1
     {
         public Form1()
         {
+
+
             InitializeComponent();
+            hidSqlButtons();
+            textBoxPassword.UseSystemPasswordChar = true;
+
             mainStatusBar.ShowPanels = true;
             Controls.Add(mainStatusBar);
 
@@ -37,6 +42,44 @@ namespace WindowsFormsApp1
 
 
         }
+
+        public void hidSqlButtons()
+        {
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button5.Visible = false;
+            checkBoxAdvancedOptions.Visible = false;
+
+        }
+
+        public void hideSqlAdvancedButtons() {
+
+        }
+
+        public void showSqlButtons()
+        {
+            button1.Visible = true;
+            button2.Visible = true;
+            button5.Visible = true;
+            checkBoxAdvancedOptions.Visible = true;
+
+            if (checkBoxAdvancedOptions.Checked == true)
+            {
+                
+            }
+            else
+            {
+                button3.Visible = false;
+                button4.Visible = false;
+            }
+            
+        }
+
+        
+
+
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -69,7 +112,7 @@ namespace WindowsFormsApp1
 
         public void buttonConnectSql_Click(object sender, EventArgs e)
         {
-            string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}",
+            string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
                 comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
             try
             {
@@ -77,9 +120,13 @@ namespace WindowsFormsApp1
                 if (sqlConnect.IsConnected)
                 {
                     MessageBox.Show("Test connection Succeded","Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    String suc = "SUCCEED !";
-                    suc = System.Drawing.Color.Green.ToString();
-                    statusPanel.Text = suc;
+                    statusPanel.Text = "SUCCED !";
+                    showSqlButtons();
+                    
+                    /* change statusPanel.Text color to GREEN, but won't happen..... :( */
+                    //String suc = "SUCCEED !";
+                    //suc = System.Drawing.Color.Green.ToString();
+                    //statusPanel.Text = suc;
                     
                 }
 
