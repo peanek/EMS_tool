@@ -11,19 +11,24 @@ namespace WindowsFormsApp1
     {
         SqlConnection sqlconn;
 
-        public SqlHelper(String connectionStrong) {
-            sqlconn = new SqlConnection(connectionStrong);
+        public SqlHelper(String connectionString)
+        {
+            sqlconn = new SqlConnection(connectionString);
         }
 
         public bool IsConnected
         {
             get
             {
-                if (sqlconn.State==System.Data.ConnectionState.Closed)
+                if (sqlconn.State == System.Data.ConnectionState.Closed)
                     sqlconn.Open();
-                    return true;
+                return true;
 
             }
         }
+
+        public String fcemsResetPassword() { return ""; }
+
+        
     }
 }

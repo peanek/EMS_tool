@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        SqlHelper sqlConnect;
         public Form1()
         {
-
+            
 
             InitializeComponent();
             hidSqlButtons();
@@ -36,8 +39,7 @@ namespace WindowsFormsApp1
 
             mainStatusBar.Panels.Add(dateTimePanel);
 
-
-
+           
 
 
 
@@ -54,7 +56,8 @@ namespace WindowsFormsApp1
 
         }
 
-        public void hideSqlAdvancedButtons() {
+        public void hideSqlAdvancedButtons()
+        {
 
         }
 
@@ -67,17 +70,17 @@ namespace WindowsFormsApp1
 
             if (checkBoxAdvancedOptions.Checked == true)
             {
-                
+
             }
             else
             {
                 button3.Visible = false;
                 button4.Visible = false;
             }
-            
+
         }
 
-        
+
 
 
 
@@ -102,7 +105,7 @@ namespace WindowsFormsApp1
         StatusBarPanel statusPanel = new StatusBarPanel();
         StatusBarPanel dateTimePanel = new StatusBarPanel();
 
-       
+
 
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
@@ -113,28 +116,29 @@ namespace WindowsFormsApp1
         public void buttonConnectSql_Click(object sender, EventArgs e)
         {
             string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
-                comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+
             try
             {
-                SqlHelper sqlConnect = new SqlHelper(connectionString);
+                sqlConnect = new SqlHelper(connectionString);
                 if (sqlConnect.IsConnected)
                 {
-                    MessageBox.Show("Test connection Succeded","Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Test connection Succeded", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     statusPanel.Text = "SUCCED !";
                     showSqlButtons();
-                    
+
                     /* change statusPanel.Text color to GREEN, but won't happen..... :( */
                     //String suc = "SUCCEED !";
                     //suc = System.Drawing.Color.Green.ToString();
                     //statusPanel.Text = suc;
-                    
+
                 }
 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                
+
             }
 
         }
@@ -144,8 +148,40 @@ namespace WindowsFormsApp1
             comboBoxSqlInstance.Items.Add(".");
             comboBoxSqlInstance.Items.Add("(local)");
             comboBoxSqlInstance.Items.Add(@".\FCEMS");
-            comboBoxSqlInstance.Items.Add(string.Format(@"{0}\FCEMS",Environment.MachineName));
+            comboBoxSqlInstance.Items.Add(string.Format(@"{0}\FCEMS", Environment.MachineName));
             comboBoxSqlInstance.SelectedIndex = 3;
+
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
+comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+
+            String SqlOutput="";
+
+            SqlConnection connSQL = new SqlConnection(connectionString);
+            connSQL.Open();
+            SqlCommand command = new SqlCommand("UPDATE Person.Person SET PersonType = 'DUPA' where BusinessEntityId = 1",connSQL);
+            SqlCommand commandSelect = new SqlCommand("SELECT Person.Type FROM Person.Person where BusinessEntityId = 1");
+
+
+            SqlDataReader dataReader = command.ExecuteReader(); //System.Data.SqlClient.SqlException: 'String or binary data would be truncated.
+            //The statement has been terminated.' !!!!
+
+
+            while (dataReader.Read())
+            {
+                SqlOutput = SqlOutput + dataReader.GetValue(0) + dataReader.GetValue(1) + "\n";
+            }
+            MessageBox.Show(SqlOutput);
+            
+            
+            
+
+            
+            
 
 
         }
