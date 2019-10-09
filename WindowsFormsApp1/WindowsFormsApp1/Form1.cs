@@ -115,8 +115,13 @@ namespace WindowsFormsApp1
 
         public void buttonConnectSql_Click(object sender, EventArgs e)
         {
-            string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
-comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+            //STRING CHANGED TO FIXED DATA
+            //string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
+            //comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+
+            string connectionString = @"Data Source=SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+
+
 
             try
             {
