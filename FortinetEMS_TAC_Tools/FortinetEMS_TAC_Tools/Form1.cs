@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 
 namespace WindowsFormsApp1
@@ -17,7 +10,7 @@ namespace WindowsFormsApp1
         SqlHelper sqlConnect;
         public Form1()
         {
-            
+
 
             InitializeComponent();
             hidSqlButtons();
@@ -39,7 +32,7 @@ namespace WindowsFormsApp1
 
             mainStatusBar.Panels.Add(dateTimePanel);
 
-           
+
 
 
 
@@ -119,7 +112,9 @@ namespace WindowsFormsApp1
             //string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
             //comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
 
-            string connectionString = @"Data Source=SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+
+            //HRADCODED data
+            string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
 
 
 
@@ -161,32 +156,56 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
-comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
+            //to enable afterwards
+            //string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
+            //comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
 
-            String SqlOutput="";
+            //HRADCODED data
+            //string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
 
-            SqlConnection connSQL = new SqlConnection(connectionString);
-            connSQL.Open();
-            SqlCommand command = new SqlCommand("UPDATE Person.Person SET PersonType = 'DUPA' where BusinessEntityId = 1",connSQL);
-            SqlCommand commandSelect = new SqlCommand("SELECT Person.Type FROM Person.Person where BusinessEntityId = 1");
+            //String SqlOutput = "";
 
-
-            SqlDataReader dataReader = command.ExecuteReader(); //System.Data.SqlClient.SqlException: 'String or binary data would be truncated.
-            //The statement has been terminated.' !!!!
+            //SqlConnection connSQL = new SqlConnection(connectionString);
+            //connSQL.Open();
 
 
-            while (dataReader.Read())
+            //SqlCommand command = new SqlCommand("UPDATE Person.Person SET PersonType = 'GC' where BusinessEntityId = 1", connSQL);
+            //SqlCommand commandSelect = new SqlCommand("SELECT PersonType FROM Person.Person where BusinessEntityId = 1", connSQL);
+
+            //SqlDataReader dataReader = commandSelect.ExecuteReader(); //System.Data.SqlClient.SqlException: 'String or binary data would be truncated.
+            ////The statement has been terminated.' !!!!
+
+
+            //while (dataReader.Read())
+            //{
+            //    SqlOutput = SqlOutput + dataReader.GetValue(0) + "\n";
+            //}
+            //MessageBox.Show(SqlOutput);
+
+            try
             {
-                SqlOutput = SqlOutput + dataReader.GetValue(0) + dataReader.GetValue(1) + "\n";
-            }
-            MessageBox.Show(SqlOutput);
-            
-            
-            
+                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+                string sqlOutput = "";
 
-            
-            
+                SqlConnection connectSql = new SqlConnection(connectionString);
+                
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+
+            }
+
+
+
+
+
 
 
         }
