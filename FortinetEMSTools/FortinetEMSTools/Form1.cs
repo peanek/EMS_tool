@@ -188,8 +188,8 @@ namespace WindowsFormsApp1
                 string sqlOutput = "";
 
                 SqlConnection connectSql = new SqlConnection(connectionString);
-                
-
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM FCM.dbo.admin_user", connectSql);
+                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
             }
             catch (Exception)
