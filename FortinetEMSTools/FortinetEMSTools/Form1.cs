@@ -184,7 +184,7 @@ namespace WindowsFormsApp1
 
             try
             {
-                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM_root;User ID=sa;Password='!Fddd89829'";
                 string sqlOutput = "";
 
                 SqlConnection connectSql = new SqlConnection(connectionString);
@@ -192,14 +192,14 @@ namespace WindowsFormsApp1
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show("There was some error");
             }
             finally
             {
-
+                MessageBox.Show("It has been updated");
             }
 
 
