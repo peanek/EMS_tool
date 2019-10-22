@@ -63,7 +63,8 @@ namespace WindowsFormsApp1
 
             if (checkBoxAdvancedOptions.Checked == true)
             {
-
+                button3.Visible = true;
+                button4.Visible = true;
             }
             else
             {
@@ -114,7 +115,7 @@ namespace WindowsFormsApp1
 
 
             //HRADCODED data
-            string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+            string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM_root;User ID=sa;Password='!Fddd89829'";
 
 
 
@@ -182,14 +183,33 @@ namespace WindowsFormsApp1
             //}
             //MessageBox.Show(SqlOutput);
 
+
+
+            //!!!!!!!!!!!
+            //// https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader?view=netframework-4.8 !!!!!!!!!!!!!
             try
             {
-                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM_root;User ID=sa;Password='!Fddd89829'";
+                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM;User ID=sa;Password='!Fddd89829'";
                 string sqlOutput = "";
 
-                SqlConnection connectSql = new SqlConnection(connectionString);
-                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM FCM.dbo.admin_user", connectSql);
-                SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+                //SqlConnection connectSql = new SqlConnection(connectionString);
+                //SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]", connectSql);
+
+                //SqlDataReader data = sqlCommand.ExecuteReader();
+
+                //using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                //{
+                //    if (sqlDataReader.HasRows)
+                //    {
+
+                //    }
+                //}
+
+                using (SqlConnection sqlConnect = new SqlConnection(connectionString)
+                {
+                    SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]",sqlConnect);
+                }
+
 
             }
             catch (Exception ex)
@@ -208,6 +228,21 @@ namespace WindowsFormsApp1
 
 
 
+        }
+
+        private void checkBoxAdvancedOptions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxAdvancedOptions.Checked)
+            {
+                button3.Visible = true;
+                button4.Visible = true;
+            }
+            else
+            {
+                button3.Visible = false;
+                button4.Visible = false;
+            }
+            
         }
     }
 }

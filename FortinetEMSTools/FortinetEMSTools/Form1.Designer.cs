@@ -237,6 +237,7 @@
             this.checkBoxAdvancedOptions.TabIndex = 15;
             this.checkBoxAdvancedOptions.Text = "Show also PURGE options";
             this.checkBoxAdvancedOptions.UseVisualStyleBackColor = true;
+            this.checkBoxAdvancedOptions.CheckedChanged += new System.EventHandler(this.checkBoxAdvancedOptions_CheckedChanged);
             // 
             // Form1
             // 
