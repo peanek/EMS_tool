@@ -192,23 +192,23 @@ namespace WindowsFormsApp1
                 string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM;User ID=sa;Password='!Fddd89829'";
                 string sqlOutput = "";
 
-                //SqlConnection connectSql = new SqlConnection(connectionString);
-                //SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]", connectSql);
+                SqlConnection connectSql = new SqlConnection(connectionString);
+                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]", connectSql);
 
-                //SqlDataReader data = sqlCommand.ExecuteReader();
+                SqlDataReader data = sqlCommand.ExecuteReader();
 
-                //using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                //{
-                //    if (sqlDataReader.HasRows)
-                //    {
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    if (sqlDataReader.HasRows)
+                    {
 
-                //    }
-                //}
+                    }
+                }
 
                 using (SqlConnection sqlConnect = new SqlConnection(connectionString)
                 {
                     SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]",sqlConnect);
-                }
+            }
 
 
             }
