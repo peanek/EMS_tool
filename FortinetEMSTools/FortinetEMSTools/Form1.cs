@@ -187,40 +187,45 @@ namespace WindowsFormsApp1
 
             //!!!!!!!!!!!
             //// https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader?view=netframework-4.8 !!!!!!!!!!!!!
-            try
-            {
-                string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM;User ID=sa;Password='!Fddd89829'";
-                string sqlOutput = "";
 
-                SqlConnection connectSql = new SqlConnection(connectionString);
-                SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]", connectSql);
+            string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM;User ID=sa;Password='!Fddd89829'";
+            string sqlOutput = "";
 
-                SqlDataReader data = sqlCommand.ExecuteReader();
-
-                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                {
-                    if (sqlDataReader.HasRows)
-                    {
-
-                    }
-                }
-
-                using (SqlConnection sqlConnect = new SqlConnection(connectionString)
-                {
-                    SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]",sqlConnect);
-            }
+            //try
+            //{
 
 
-            }
-            catch (Exception ex)
-            {
+            //    SqlConnection connectSql = new SqlConnection(connectionString);
+            //    SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]", connectSql);
 
-                MessageBox.Show("There was some error");
-            }
-            finally
-            {
-                MessageBox.Show("It has been updated");
-            }
+            //    SqlDataReader data = sqlCommand.ExecuteReader();
+
+            //    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+            //    {
+            //        if (sqlDataReader.HasRows)
+            //        {
+
+            //        }
+            //    }
+
+            //    using (SqlConnection sqlConnect = new SqlConnection(connectionString)
+            //    {
+            //        SqlCommand sqlCommand = new SqlCommand("SELECT * FROM [FCM].[dbo].[admin_user]",sqlConnect){
+            //        ;
+            //    }
+            //}
+
+
+
+            //catch (SqlException sqlex)
+            //{
+
+            //    MessageBox.Show("There was some error");
+            //}
+            //finally
+            //{
+            //    MessageBox.Show("It has been updated");
+            //}
 
 
 
@@ -242,7 +247,12 @@ namespace WindowsFormsApp1
                 button3.Visible = false;
                 button4.Visible = false;
             }
-            
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //MessageBox.Show("dasda");
         }
     }
 }
