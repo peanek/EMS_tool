@@ -10,3 +10,4 @@ Embedded .EXE file (need to be run as local server 'Administrator'). There is no
 
 ## Usage and instructions 
 
+![WMS_tools_mainForm](https://github.com/peanek/EMS_tool/blob/master/_images/EMS_tools_mainForm.png)
