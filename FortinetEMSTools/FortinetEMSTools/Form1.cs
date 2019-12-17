@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-
+using System.Reflection;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
         SqlHelper sqlConnect;
+        
         public Form1()
         {
-
-
             InitializeComponent();
             hidSqlButtons();
             textBoxPassword.UseSystemPasswordChar = true;
@@ -31,7 +30,7 @@ namespace WindowsFormsApp1
             dateTimePanel.AutoSize = StatusBarPanelAutoSize.Contents;
 
             mainStatusBar.Panels.Add(dateTimePanel);
-
+            this.Text = "Fortinet EMS TAC tools, VER : " + Assembly.GetEntryAssembly().GetName().Version;
 
 
 
@@ -46,7 +45,7 @@ namespace WindowsFormsApp1
             button4.Visible = false;
             button5.Visible = false;
             checkBoxAdvancedOptions.Visible = false;
-
+            
         }
 
         public void hideSqlAdvancedButtons()
@@ -99,7 +98,7 @@ namespace WindowsFormsApp1
         StatusBarPanel statusPanel = new StatusBarPanel();
         StatusBarPanel dateTimePanel = new StatusBarPanel();
 
-
+        
 
 
         private void toolStripMenuItem5_Click(object sender, EventArgs e)
@@ -157,39 +156,80 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //to enable afterwards
-            //string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
-            //comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
-
-            //HRADCODED data
-            //string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
-
-            //String SqlOutput = "";
-
-            //SqlConnection connSQL = new SqlConnection(connectionString);
-            //connSQL.Open();
-
-
-            //SqlCommand command = new SqlCommand("UPDATE Person.Person SET PersonType = 'GC' where BusinessEntityId = 1", connSQL);
-            //SqlCommand commandSelect = new SqlCommand("SELECT PersonType FROM Person.Person where BusinessEntityId = 1", connSQL);
-
-            //SqlDataReader dataReader = commandSelect.ExecuteReader(); //System.Data.SqlClient.SqlException: 'String or binary data would be truncated.
-            ////The statement has been terminated.' !!!!
-
-
-            //while (dataReader.Read())
-            //{
-            //    SqlOutput = SqlOutput + dataReader.GetValue(0) + "\n";
-            //}
-            //MessageBox.Show(SqlOutput);
-
-
-
             //!!!!!!!!!!!
             //// https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqldatareader?view=netframework-4.8 !!!!!!!!!!!!!
 
+
             string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=FCM;User ID=sa;Password='!Fddd89829'";
-            string sqlOutput = "";
+            SqlCommand command;
+            SqlDataReader dataReader;
+            String sqlQuery, Output = "";
+            SqlConnection cnn = new SqlConnection(connectionString);
+
+            try
+            {
+                sqlConnect = new SqlHelper(connectionString);
+
+                if (sqlConnect.IsConnected)
+                {
+                    sqlQuery = "USE FCM_root;" +
+                        "SELECT * FROM admin_user where name = 'admin' and admin_roles_id = 1";
+                    command = new SqlCommand(sqlQuery, cnn);
+                    cnn.Open();
+                    dataReader = command.ExecuteReader(); //Something isn't right here. Need to check it 
+                    string pass = Convert.ToString(dataReader.GetValue(0));
+                    if (true)
+                    {
+                        MessageBox.Show(pass);
+                        
+                    }
+                    
+                }
+
+                if (sqlConnect.IsConnected)
+                {
+                    sqlQuery = "USE FCM_root; " +
+                        "UPDATE admin_user SET password = '$2a$14$JCi6CAspgd835Z/loB8FMuP6xqaclhq6bkaT2iy4K1IzyGYw3OsTW' FROM admin_user WHERE name = 'admin' AND admin_roles_id = 1";
+                    command = new SqlCommand(sqlQuery, cnn);
+                    cnn.Open();
+                    //sqlQuery = "SELECT * FROM admin_user where name = 'admin' AND admin_roles_id = 1";
+                    dataReader = command.ExecuteReader();
+
+                    /* N/A in this button
+                    */
+                    //while (dataReader.Read())
+                    //{
+                    //    Output += dataReader.GetValue(0) + " | " + dataReader.GetValue(1) + " | " + dataReader.GetValue(3)+"\n";
+                    //}
+                    MessageBox.Show("Record has been updated for password == NULL,\n Please try to log into EMS 6.2.x console \nOuput of query : \n" + Output);
+                    cnn.Close();
+                    
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message");
+
+            }
+
+            finally
+            {
+
+                
+            }
+
+            //String sqlQuery, Output = "";
+            //sqlQuery = "USE FCM_root; " +
+            //    "UPDATE user_admin SET password = NULL where name = 'admin'";
+            //SqlConnection cnn;
+            //cnn = new SqlConnection(connectionString);
+            //cnn.Open();
+
+
+
+
+
 
             //try
             //{
@@ -228,7 +268,24 @@ namespace WindowsFormsApp1
             //}
 
 
+            //to enable afterwards
+            //string connectionString = string.Format("Data Source={0};Initial Catalog={1};User ID={2};Password={3}", //ConnectionTimeout=2, CommandTimeout = 2, add 2-5 sectimoeut to quic reaction
+            //comboBoxSqlInstance.Text, textBoxDbName.Text, textBoxUsername.Text, textBoxPassword.Text);
 
+            //HRADCODED data
+            //string connectionString = @"Data Source=.\SQLLOCALDB;Initial Catalog=AdventureWorks;User ID=sa;Password='!Fddd89829'";
+
+            //String SqlOutput = "";
+
+            //SqlConnection connSQL = new SqlConnection(connectionString);
+            //connSQL.Open();
+
+
+            //SqlCommand command = new SqlCommand("UPDATE Person.Person SET PersonType = 'GC' where BusinessEntityId = 1", connSQL);
+            //SqlCommand commandSelect = new SqlCommand("SELECT PersonType FROM Person.Person where BusinessEntityId = 1", connSQL);
+
+            //SqlDataReader dataReader = commandSelect.ExecuteReader(); //System.Data.SqlClient.SqlException: 'String or binary data would be truncated.
+            ////The statement has been terminated.' !!!!
 
 
 
@@ -241,11 +298,13 @@ namespace WindowsFormsApp1
             {
                 button3.Visible = true;
                 button4.Visible = true;
+                statusPanel.Text = "Advanced options are VISIBLE";
             }
             else
             {
                 button3.Visible = false;
                 button4.Visible = false;
+                statusPanel.Text = "Advanced options are NOT VISIBLE";
             }
 
         }
